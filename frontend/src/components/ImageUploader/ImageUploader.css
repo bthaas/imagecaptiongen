@@ -1,0 +1,325 @@
+/* ImageUploader Component Styles */
+.image-uploader {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.image-uploader__drop-zone {
+  border: 2px dashed var(--gray-300);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xxl);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  background-color: var(--gray-100);
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-uploader__drop-zone:hover {
+  border-color: var(--primary-color);
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.image-uploader__drop-zone:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.image-uploader--drag-over .image-uploader__drop-zone {
+  border-color: var(--primary-color);
+  background-color: rgba(0, 123, 255, 0.1);
+  transform: scale(1.02);
+}
+
+.image-uploader--disabled .image-uploader__drop-zone {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: var(--gray-200);
+}
+
+.image-uploader--disabled .image-uploader__drop-zone:hover {
+  border-color: var(--gray-300);
+  background-color: var(--gray-200);
+  transform: none;
+}
+
+.image-uploader--uploading .image-uploader__drop-zone {
+  border-color: var(--info-color);
+  background-color: rgba(23, 162, 184, 0.05);
+  cursor: default;
+}
+
+.image-uploader--error .image-uploader__drop-zone {
+  border-color: var(--danger-color);
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+.image-uploader__file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.image-uploader__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.image-uploader__icon {
+  color: var(--gray-400);
+  transition: color var(--transition-fast);
+}
+
+.image-uploader__drop-zone:hover .image-uploader__icon {
+  color: var(--primary-color);
+}
+
+.image-uploader--drag-over .image-uploader__icon {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.image-uploader__text {
+  text-align: center;
+}
+
+.image-uploader__primary-text {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: var(--spacing-sm);
+}
+
+.image-uploader__secondary-text {
+  font-size: var(--font-size-sm);
+  color: var(--gray-500);
+  margin-bottom: 0;
+}
+
+.image-uploader__browse-button {
+  margin-top: var(--spacing-sm);
+}
+
+/* Uploading State */
+.image-uploader__uploading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.image-uploader__uploading-text {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--info-color);
+  margin-bottom: var(--spacing-lg);
+}
+
+.image-uploader__progress-bar {
+  width: 100%;
+  max-width: 300px;
+  height: 8px;
+  background-color: var(--gray-200);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  position: relative;
+}
+
+.image-uploader__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--info-color), var(--primary-color));
+  border-radius: var(--border-radius-md);
+  transition: width var(--transition-fast);
+  position: relative;
+}
+
+.image-uploader__progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Error State */
+.image-uploader__error {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  border-radius: var(--border-radius-md);
+  animation: slideUp var(--transition-normal) ease-out;
+}
+
+.image-uploader__error-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.image-uploader__error-icon {
+  color: var(--danger-color);
+  flex-shrink: 0;
+}
+
+.image-uploader__error-text {
+  color: var(--danger-color);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  flex: 1;
+}
+
+.image-uploader__error-close {
+  background: none;
+  border: none;
+  color: var(--danger-color);
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-sm);
+  transition: background-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.image-uploader__error-close:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.image-uploader__error-close:focus {
+  outline: 2px solid var(--danger-color);
+  outline-offset: 1px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .image-uploader__drop-zone {
+    padding: var(--spacing-xl);
+    min-height: 160px;
+  }
+
+  .image-uploader__icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .image-uploader__primary-text {
+    font-size: var(--font-size-base);
+  }
+
+  .image-uploader__secondary-text {
+    font-size: var(--font-size-xs);
+  }
+
+  .image-uploader__content {
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .image-uploader__drop-zone {
+    padding: var(--spacing-lg);
+    min-height: 140px;
+  }
+
+  .image-uploader__icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .image-uploader__primary-text {
+    font-size: var(--font-size-sm);
+  }
+
+  .image-uploader__browse-button {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .image-uploader__progress-bar {
+    max-width: 250px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .image-uploader__drop-zone {
+    border-width: 3px;
+  }
+
+  .image-uploader--drag-over .image-uploader__drop-zone {
+    border-width: 4px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .image-uploader__drop-zone,
+  .image-uploader__icon,
+  .image-uploader__progress-fill {
+    transition: none;
+  }
+
+  .image-uploader--drag-over .image-uploader__drop-zone {
+    transform: none;
+  }
+
+  .image-uploader--drag-over .image-uploader__icon {
+    transform: none;
+  }
+
+  .image-uploader__progress-fill::after {
+    animation: none;
+  }
+
+  .image-uploader__error {
+    animation: none;
+  }
+}
+
+/* Focus visible support for better accessibility */
+.image-uploader__drop-zone:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.image-uploader__error-close:focus-visible {
+  outline: 2px solid var(--danger-color);
+  outline-offset: 1px;
+}
