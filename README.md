@@ -2,15 +2,23 @@
 
 An end-to-end deep learning application that automatically generates natural language captions for uploaded images using a CNN + LSTM architecture.
 
-## Project Structure
+## 🎯 Features
+
+- **Real-time Image Captioning**: Upload images and get AI-generated captions instantly
+- **Deep Learning Pipeline**: CNN feature extraction + LSTM sequence generation
+- **Full-Stack Application**: React frontend with FastAPI backend
+- **Production Ready**: Trained on 40,000+ image-caption pairs from Flickr8k dataset
+- **High Accuracy**: 71% training accuracy with beam search optimization
+
+## 🏗️ Project Structure
 
 ```
 ├── backend/                 # FastAPI backend
 │   ├── app/
 │   │   ├── main.py         # FastAPI application entry point
-│   │   ├── models/         # ML models
-│   │   ├── services/       # Business logic services
+│   │   ├── services/       # ML services (caption generation, training)
 │   │   └── utils/          # Utility functions
+│   ├── scripts/            # Training and testing scripts
 │   ├── tests/              # Backend tests
 │   ├── requirements.txt    # Python dependencies
 │   └── Dockerfile         # Backend container configuration
@@ -27,7 +35,7 @@ An end-to-end deep learning application that automatically generates natural lan
 └── README.md             # This file
 ```
 
-## Development Setup
+## 🚀 Development Setup
 
 ### Backend Setup
 
@@ -68,7 +76,51 @@ Run the entire application with Docker Compose:
 docker-compose up --build
 ```
 
-## Deployment
+## 🤖 Model Training
+
+The application includes comprehensive training scripts for the image captioning model:
+
+### Quick Training (for testing)
+```bash
+cd backend
+python scripts/train_model_simple.py
+```
+
+### Full Dataset Training (production model)
+```bash
+cd backend
+python scripts/train_model_full_dataset_fixed.py
+```
+
+### Model Performance
+- **Dataset**: Flickr8k (40,000+ image-caption pairs)
+- **Architecture**: ResNet50 (CNN) + LSTM (RNN)
+- **Training Accuracy**: 71.9%
+- **Validation Accuracy**: 64.0%
+- **Vocabulary Size**: 8,497 words
+
+## 📡 API Endpoints
+
+- `GET /` - Root endpoint
+- `GET /health` - Health check
+- `POST /api/v1/generate-caption` - Generate caption for uploaded image
+
+## 🛠️ Technology Stack
+
+- **Backend**: FastAPI, TensorFlow/Keras, ResNet50, LSTM
+- **Frontend**: React, TypeScript, Axios
+- **ML Pipeline**: CNN feature extraction, LSTM sequence generation, Beam search
+- **Deployment**: Google Cloud Run, Docker
+- **CI/CD**: Google Cloud Build
+
+## 🎨 Example Captions Generated
+
+- "a man in a black wetsuit is surfing in the ocean"
+- "a black and white dog is playing with a tennis ball on the grass"
+- "people are standing on a beach with a large body of water and mountains in the background"
+- "a basketball player in a white shirt is holding a basketball in front of a crowd"
+
+## 🚀 Deployment
 
 The application is configured for deployment on Google Cloud Platform using Cloud Build and Cloud Run.
 
@@ -81,16 +133,3 @@ The application is configured for deployment on Google Cloud Platform using Clou
 ```bash
 gcloud builds submit --config cloudbuild.yaml
 ```
-
-## API Endpoints
-
-- `GET /` - Root endpoint
-- `GET /health` - Health check
-- `POST /api/v1/generate-caption` - Generate caption for uploaded image
-
-## Technology Stack
-
-- **Backend**: FastAPI, TensorFlow, Python 3.9
-- **Frontend**: React, TypeScript, Axios
-- **Deployment**: Google Cloud Run, Docker
-- **CI/CD**: Google Cloud Build
