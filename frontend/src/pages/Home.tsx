@@ -3,7 +3,6 @@ import { ImageUploader, ImagePreview } from '../components';
 import { useAppContext } from '../context/AppContext';
 import { useAPI } from '../hooks/useAPI';
 import { ErrorType } from '../types';
-import DebugTest from '../components/DebugTest';
 import '../components/ImageUploader/ImageUploader.css';
 import '../components/ImagePreview/ImagePreview.css';
 import '../components/CaptionDisplay/CaptionDisplay.css';
@@ -85,7 +84,6 @@ const Home: React.FC = () => {
   return (
     <div className="home">
       <div className="home__content">
-        <DebugTest />
         <h2>Welcome to AI Image Caption Generator</h2>
         <p>
           Upload an image and our AI will generate a descriptive caption for you.
