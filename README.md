@@ -30,6 +30,8 @@ An end-to-end deep learning application that automatically generates natural lan
 ├── shared/                # Shared utilities and types
 │   ├── types.ts           # TypeScript type definitions
 │   └── constants.ts       # Shared constants
+├── scripts/               # Deployment scripts
+│   └── deploy.sh          # GCP deployment script
 ├── docker-compose.yml     # Local development setup
 ├── cloudbuild.yaml        # Google Cloud Build configuration
 └── README.md             # This file
@@ -120,16 +122,70 @@ python scripts/train_model_full_dataset_fixed.py
 - "people are standing on a beach with a large body of water and mountains in the background"
 - "a basketball player in a white shirt is holding a basketball in front of a crowd"
 
-## 🚀 Deployment
+## 🚀 Deployment to Google Cloud
 
-The application is configured for deployment on Google Cloud Platform using Cloud Build and Cloud Run.
+This project is configured for easy deployment to Google Cloud Platform using Cloud Build and Cloud Run. The provided script automates the entire process.
 
 ### Prerequisites
-- Google Cloud Project with billing enabled
-- Cloud Build and Cloud Run APIs enabled
-- Docker images pushed to Google Container Registry
 
-### Deploy
-```bash
-gcloud builds submit --config cloudbuild.yaml
-```
+1. **Google Cloud Project**: Make sure you have a GCP project with billing enabled.
+2. **gcloud CLI**: Install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) on your local machine.
+
+### One-Step Deployment
+
+A deployment script is provided to automate the entire setup and deployment process.
+
+1. **Make the script executable**:
+    ```bash
+    chmod +x scripts/deploy.sh
+    ```
+
+2. **Run the deployment script**:
+    ```bash
+    ./scripts/deploy.sh
+    ```
+
+The script will guide you through:
+- Logging into `gcloud`
+- Selecting your GCP project and region
+- Enabling the required APIs
+- Creating an Artifact Registry repository
+- Submitting the build to Cloud Build, which deploys the services to Cloud Run
+
+Once complete, the script will output the URLs for your frontend and backend services.
+
+### Manual Deployment
+
+If you prefer to run the steps manually:
+
+1. **Configure gcloud**:
+    ```bash
+    gcloud auth login
+    gcloud config set project YOUR_PROJECT_ID
+    ```
+
+2. **Enable APIs**:
+    ```bash
+    gcloud services enable cloudbuild.googleapis.com run.googleapis.com artifactregistry.googleapis.com
+    ```
+
+3. **Create Artifact Registry Repo**:
+    ```bash
+    gcloud artifacts repositories create ai-caption-generator --repository-format=docker --location=us-central1
+    ```
+
+4. **Submit build**:
+    ```bash
+    gcloud builds submit --config cloudbuild.yaml
+    ```
+
+## What's Next?
+
+This project is nearly complete. Based on the original implementation plan, here are the remaining tasks to make it fully production-ready:
+
+- **Comprehensive Error Handling**: Enhance error handling on both frontend and backend for a more robust user experience.
+- **Performance Optimizations**: Implement image compression, model caching, and frontend bundle size optimizations.
+- **Comprehensive Test Suite**: Build out the end-to-end and load testing suites.
+- **Final Integration and Verification**: Perform final testing to ensure all requirements are met.
+
+Contributions are welcome!
