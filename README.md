@@ -122,6 +122,14 @@ python scripts/train_model_full_dataset_fixed.py
 - "people are standing on a beach with a large body of water and mountains in the background"
 - "a basketball player in a white shirt is holding a basketball in front of a crowd"
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for details.
+
 ## 🚀 Deployment to Google Cloud
 
 This project is configured for easy deployment to Google Cloud Platform using Cloud Build and Cloud Run. The provided script automates the entire process.
