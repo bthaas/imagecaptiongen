@@ -122,14 +122,6 @@ python scripts/train_model_full_dataset_fixed.py
 - "people are standing on a beach with a large body of water and mountains in the background"
 - "a basketball player in a white shirt is holding a basketball in front of a crowd"
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for details.
-
 ## 🚀 Deployment to Google Cloud
 
 This project is configured for easy deployment to Google Cloud Platform using Cloud Build and Cloud Run. The provided script automates the entire process.
@@ -187,13 +179,3 @@ If you prefer to run the steps manually:
     gcloud builds submit --config cloudbuild.yaml
     ```
 
-## What's Next?
-
-This project is nearly complete. Based on the original implementation plan, here are the remaining tasks to make it fully production-ready:
-
-- **Comprehensive Error Handling**: Enhance error handling on both frontend and backend for a more robust user experience.
-- **Performance Optimizations**: Implement image compression, model caching, and frontend bundle size optimizations.
-- **Comprehensive Test Suite**: Build out the end-to-end and load testing suites.
-- **Final Integration and Verification**: Perform final testing to ensure all requirements are met.
-
-Contributions are welcome!
